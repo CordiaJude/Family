@@ -75,7 +75,7 @@ public struct ClaimLegButton: View {
             Label {
                 Text("I’ve got the \(leg.displayName.lowercased())")
             } icon: {
-                Image(systemName: leg == .dropoff ? "car.side.arrowtriangle.up.fill" : "car.side.arrowtriangle.down.fill")
+                Image(systemName: "car.fill")
             }
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(me.color.foregroundOnFill)
