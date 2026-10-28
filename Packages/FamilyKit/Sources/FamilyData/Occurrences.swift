@@ -12,6 +12,15 @@ public struct EventOccurrence: Identifiable {
     public let title: String
     public let locationName: String?
 
+    public init(event: Event, occurrenceDate: Date, start: Date, end: Date, title: String, locationName: String?) {
+        self.event = event
+        self.occurrenceDate = occurrenceDate
+        self.start = start
+        self.end = end
+        self.title = title
+        self.locationName = locationName
+    }
+
     public var id: String { "\(event.id.uuidString)|\(occurrenceDate.timeIntervalSinceReferenceDate)" }
     public var isAllDay: Bool { event.isAllDay }
 }

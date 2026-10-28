@@ -60,7 +60,6 @@ struct NextUpAccessory: View {
         HStack(spacing: 10) {
             Image(systemName: "car.fill")
                 .foregroundStyle(.orange)
-                .symbolEffect(.pulse, options: .repeat(2))
             if placement == .inline {
                 Text("\(name) \(next.leg.displayName.lowercased()) · \(time)")
                     .font(.subheadline.weight(.semibold))

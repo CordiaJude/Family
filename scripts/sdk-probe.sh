@@ -29,9 +29,9 @@ while IFS= read -r line; do
   echo "================ $line ================"
   if [[ ${#ctx[@]} -gt 0 ]]; then
     grep -rhE "${ctx[@]}" --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
-      | sed -E 's/^[[:space:]]+//' | head -80
+      | sed -E 's/^[[:space:]]+//' | head -80 || true
   else
     grep -rhE --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
-      | sed -E 's/^[[:space:]]+//' | sort -u | head -40
+      | sed -E 's/^[[:space:]]+//' | sort -u | head -40 || true
   fi
 done < "$(dirname "$0")/probe-patterns.txt"
