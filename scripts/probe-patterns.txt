@@ -1,28 +1,17 @@
 # One extended regex per line. Matching declarations from the iOS Simulator SDK
 # .swiftinterface files are printed by the sdk-probe workflow.
-func glassEffect\(
-func glassEffectID\(
-func glassEffectTransition\(
-func glassEffectUnion\(
-struct GlassEffectContainer
-public struct Glass[ :]
-static var regular: SwiftUI.Glass
-func tint\(_ color: SwiftUI.Color\?\) -> SwiftUI.Glass
-func interactive\(
-static var glass: SwiftUI.GlassButtonStyle
-static var glassProminent
-func tabBarMinimizeBehavior\(
-struct TabBarMinimizeBehavior
-func tabViewBottomAccessory
-tabViewBottomAccessoryPlacement
-enum TabViewBottomAccessoryPlacement
-struct ToolbarSpacer
-func scrollEdgeEffectStyle\(
-struct ScrollEdgeEffectStyle
-func navigationTransition\(
-func matchedTransitionSource\(
-role: SwiftUI.TabRole
-static var sidebarAdaptable
-func backgroundExtensionEffect
-func sensoryFeedback\(
-struct ContentUnavailableView
+# Prefix "A<n> " or "B<n> " to print n lines of context after or before each match.
+B3 func tabViewBottomAccessory<Content>\(isEnabled
+A12 public enum TabViewBottomAccessoryPlacement
+A14 public struct TabBarMinimizeBehavior
+A16 public struct ScrollEdgeEffectStyle
+A16 public struct GlassEffectTransition
+A30 public struct Glass : Swift.Equatable
+A12 public struct ToolbarSpacer
+B3 func navigationSubtitle\(
+B2 func sensoryFeedback<T>\(_ feedback
+A40 public struct SensoryFeedback
+B3 class MKReverseGeocodingRequest
+B2 func searchToolbarBehavior
+B2 func tabViewSearchActivation
+B2 static var zoom\(

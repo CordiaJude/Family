@@ -17,10 +17,21 @@ FW="$SDK/System/Library/Frameworks"
 echo
 echo "SDK: $SDK"
 
+# Each line: optional "A<n> " / "B<n> " prefix for lines of context after/before, then a regex.
 while IFS= read -r line; do
   [[ -z "$line" || "$line" == \#* ]] && continue
+  ctx=()
+  if [[ "$line" =~ ^([AB])([0-9]+)\ (.*)$ ]]; then
+    ctx=("-${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}")
+    line="${BASH_REMATCH[3]}"
+  fi
   echo
   echo "================ $line ================"
-  grep -rhE --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
-    | sed -E 's/^[[:space:]]+//' | sort -u | head -40
+  if [[ ${#ctx[@]} -gt 0 ]]; then
+    grep -rhE "${ctx[@]}" --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
+      | sed -E 's/^[[:space:]]+//' | head -80
+  else
+    grep -rhE --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
+      | sed -E 's/^[[:space:]]+//' | sort -u | head -40
+  fi
 done < "$(dirname "$0")/probe-patterns.txt"

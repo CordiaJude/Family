@@ -13,11 +13,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [macos-latest, macos-15, macos-26]
+        runner: [macos-26]
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Select newest Xcode
         run: |
           ls -d /Applications/Xcode*.app
