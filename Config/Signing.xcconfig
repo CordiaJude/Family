@@ -1,0 +1,21 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Signing — the only file you need to edit to build for your own devices.
+//
+// 1. DEVELOPMENT_TEAM: your 10-character Team ID
+//    (developer.apple.com → Account → Membership details).
+// 2. BUNDLE_ID_PREFIX: a reverse-DNS prefix you own, e.g. com.yourname.
+//
+// Everything else derives from these two values:
+//   App            $(BUNDLE_ID_PREFIX).family
+//   Widgets        $(BUNDLE_ID_PREFIX).family.widgets
+//   Share          $(BUNDLE_ID_PREFIX).family.share
+//   App Group      group.$(BUNDLE_ID_PREFIX).family
+//   iCloud         iCloud.$(BUNDLE_ID_PREFIX).family
+// ─────────────────────────────────────────────────────────────────────────────
+
+DEVELOPMENT_TEAM =
+BUNDLE_ID_PREFIX = com.example
+
+FAMILY_BUNDLE_ID = $(BUNDLE_ID_PREFIX).family
+FAMILY_APP_GROUP = group.$(BUNDLE_ID_PREFIX).family
+FAMILY_CLOUDKIT_CONTAINER = iCloud.$(BUNDLE_ID_PREFIX).family

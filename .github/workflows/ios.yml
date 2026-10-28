@@ -1,0 +1,70 @@
+name: iOS
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Select newest Xcode
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+          echo "SIM_UDID=$(scripts/ci/simulator.sh 'iPhone 17 Pro')" >> "$GITHUB_ENV"
+
+      - name: Build app (zero warnings)
+        run: |
+          LOG=build.log scripts/ci/xcb.sh build \
+            -project Family.xcodeproj \
+            -scheme Family \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=$SIM_UDID" \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO
+          scripts/ci/check-warnings.sh build.log
+
+      - name: Unit tests (FamilyKit)
+        working-directory: Packages/FamilyKit
+        run: |
+          LOG=../../test.log ../../scripts/ci/xcb.sh test \
+            -scheme FamilyKit-Package \
+            -destination "platform=iOS Simulator,id=$SIM_UDID" \
+            -derivedDataPath ../../build/PackageDerivedData
+          ../../scripts/ci/check-warnings.sh ../../test.log
+
+      - name: Build Release (archive configuration)
+        run: |
+          LOG=release.log scripts/ci/xcb.sh build \
+            -project Family.xcodeproj \
+            -scheme Family \
+            -configuration Release \
+            -destination "generic/platform=iOS Simulator" \
+            -derivedDataPath build/ReleaseDerivedData \
+            CODE_SIGNING_ALLOWED=NO
+          scripts/ci/check-warnings.sh release.log
+
+      - name: Screenshots
+        run: scripts/ci/screenshots.sh "$SIM_UDID" build/DerivedData/Build/Products/Debug-iphonesimulator/Family.app screenshots
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: screenshots
+          if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: logs
+          path: "*.log"

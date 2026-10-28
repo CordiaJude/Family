@@ -20,11 +20,7 @@ let products: [Product] = [
 let targets: [Target] = [
     .target(name: "FamilyCore"),
     .target(name: "FamilyData", dependencies: ["FamilyCore"]),
-    .target(
-        name: "FamilyDesign",
-        dependencies: ["FamilyCore"],
-        swiftSettings: [.defaultIsolation(MainActor.self)]
-    ),
+    .target(name: "FamilyDesign", dependencies: ["FamilyCore", "FamilyData"]),
     .testTarget(name: "FamilyCoreTests", dependencies: ["FamilyCore"]),
     .testTarget(name: "FamilyDataTests", dependencies: ["FamilyData"]),
 ]
