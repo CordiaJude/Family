@@ -10,12 +10,18 @@ on:
 
 jobs:
   probe:
-    runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-latest, macos-15, macos-26]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Select newest Xcode
         run: |
           ls -d /Applications/Xcode*.app
+          sw_vers
           XCODE=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
           sudo xcode-select -s "$XCODE"
       - name: Probe
