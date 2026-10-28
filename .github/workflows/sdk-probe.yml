@@ -1,0 +1,22 @@
+name: SDK Probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/probe-patterns.txt
+      - scripts/sdk-probe.sh
+      - .github/workflows/sdk-probe.yml
+
+jobs:
+  probe:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select newest Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE=$(ls -d /Applications/Xcode_*.app | grep -v -i beta | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE"
+      - name: Probe
+        run: scripts/sdk-probe.sh

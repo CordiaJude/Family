@@ -1,0 +1,28 @@
+# One extended regex per line. Matching declarations from the iOS Simulator SDK
+# .swiftinterface files are printed by the sdk-probe workflow.
+func glassEffect\(
+func glassEffectID\(
+func glassEffectTransition\(
+func glassEffectUnion\(
+struct GlassEffectContainer
+public struct Glass[ :]
+static var regular: SwiftUI.Glass
+func tint\(_ color: SwiftUI.Color\?\) -> SwiftUI.Glass
+func interactive\(
+static var glass: SwiftUI.GlassButtonStyle
+static var glassProminent
+func tabBarMinimizeBehavior\(
+struct TabBarMinimizeBehavior
+func tabViewBottomAccessory
+tabViewBottomAccessoryPlacement
+enum TabViewBottomAccessoryPlacement
+struct ToolbarSpacer
+func scrollEdgeEffectStyle\(
+struct ScrollEdgeEffectStyle
+func navigationTransition\(
+func matchedTransitionSource\(
+role: SwiftUI.TabRole
+static var sidebarAdaptable
+func backgroundExtensionEffect
+func sensoryFeedback\(
+struct ContentUnavailableView
