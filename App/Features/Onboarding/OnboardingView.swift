@@ -339,34 +339,41 @@ struct FamilyStep: View {
         }
     }
 
+    @ViewBuilder
     private func memberRow(_ draft: MemberDraft, subtitle: String, editable: Bool) -> some View {
-        Button {
-            if editable { editing = EditRequest(draft: draft, isNew: false) }
-        } label: {
-            HStack(spacing: 12) {
-                AvatarView(draft.badge, size: .regular)
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(draft.trimmedName)
-                        .font(.body.weight(.medium))
-                        .foregroundStyle(.primary)
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                if editable {
-                    Image(systemName: "chevron.forward")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(.tertiary)
-                }
+        let content = HStack(spacing: 12) {
+            AvatarView(draft.badge, size: .regular)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(draft.trimmedName)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(.primary)
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .contentShape(.rect)
+            Spacer()
+            if editable {
+                Image(systemName: "chevron.forward")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
         }
-        .buttonStyle(.plain)
-        .disabled(!editable)
-        .accessibilityHint(editable ? Text("Edit") : Text(""))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .contentShape(.rect)
+
+        if editable {
+            Button {
+                editing = EditRequest(draft: draft, isNew: false)
+            } label: {
+                content
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint(Text("Edit"))
+        } else {
+            content
+                .accessibilityElement(children: .combine)
+        }
     }
 }
 

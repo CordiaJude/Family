@@ -52,7 +52,7 @@ struct CalendarView: View {
                     }
                 }
             }
-            .safeAreaInset(edge: .top, spacing: 0) {
+            .safeAreaBar(edge: .top, spacing: 0) {
                 MemberFilterBar(members: members.map(\.badge), selection: $memberFilter)
             }
             .navigationTitle("Calendar")

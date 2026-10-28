@@ -48,7 +48,8 @@ struct OnboardingPage<Content: View>: View {
             .frame(maxWidth: .infinity)
         }
         .scrollDismissesKeyboard(.interactively)
-        .safeAreaInset(edge: .bottom) {
+        // safeAreaBar (not safeAreaInset) gives the bar the system scroll edge effect.
+        .safeAreaBar(edge: .bottom) {
             VStack(spacing: 6) {
                 Button(action: primaryAction) {
                     Text(primaryTitle)

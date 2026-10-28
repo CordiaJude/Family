@@ -11,3 +11,4 @@ B3 init\(completion: MapKit.MKLocalSearchCompletion
 B2 func requestFullAccessToEvents
 B2 struct ContactAccessButton
 B3 func contactAccessPicker
+B3 func safeAreaBar
