@@ -121,6 +121,7 @@ public struct AvatarStack: View {
     }
 }
 
+#if DEBUG
 #Preview("Avatars") {
     VStack(spacing: 24) {
         HStack(spacing: 16) {
@@ -137,3 +138,4 @@ public struct AvatarStack: View {
     }
     .padding()
 }
+#endif

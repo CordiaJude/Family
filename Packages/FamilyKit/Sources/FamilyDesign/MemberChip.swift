@@ -80,6 +80,7 @@ public struct MemberFilterBar: View {
     }
 }
 
+#if DEBUG
 #Preview("Chips") {
     @Previewable @State var selection: Set<UUID> = [MemberBadge.emma.id]
     VStack(alignment: .leading, spacing: 16) {
@@ -89,3 +90,4 @@ public struct MemberFilterBar: View {
         MemberFilterBar(members: MemberBadge.parkers, selection: $selection)
     }
 }
+#endif
