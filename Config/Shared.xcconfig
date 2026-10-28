@@ -28,6 +28,7 @@ ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES
 ENABLE_PREVIEWS = YES
 DEAD_CODE_STRIPPING = YES
 
-// Extra Swift conditions for Debug builds. Add SYNC_ENABLED here to test
-// iCloud sync from a Debug build (Release always syncs).
+// Extra Swift compilation conditions. SYNC_ENABLED turns on iCloud sync; it
+// requires the CloudKit entitlement and is enabled for Release in Phase 4.
 FAMILY_DEBUG_CONDITIONS =
+FAMILY_RELEASE_CONDITIONS =

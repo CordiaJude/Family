@@ -65,6 +65,8 @@ TARGETS = [
             "INFOPLIST_FILE": "Config/Family-Info.plist",
             "INFOPLIST_KEY_CFBundleDisplayName": "Family",
             "INFOPLIST_KEY_LSApplicationCategoryType": "public.app-category.lifestyle",
+            "INFOPLIST_KEY_NSLocationWhenInUseUsageDescription": "Family uses your location to set your home on the map and, if you choose, to show your family where you are. You can pause sharing at any time.",
+            "INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription": "Family reads when you’re busy so it can warn about ride conflicts, and can copy family events into a calendar you choose. Event details from your personal calendars are never shared.",
             "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
             "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
             "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
@@ -148,7 +150,8 @@ PROJECT_SETTINGS = {
         "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
         "ENABLE_NS_ASSERTIONS": "NO",
         "MTL_ENABLE_DEBUG_INFO": "NO",
-        "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "SYNC_ENABLED $(inherited)",
+        # SYNC_ENABLED is added here in Phase 4, once the CloudKit entitlement exists.
+        "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "$(FAMILY_RELEASE_CONDITIONS) $(inherited)",
         "SWIFT_COMPILATION_MODE": "wholemodule",
         "VALIDATE_PRODUCT": "YES",
     },

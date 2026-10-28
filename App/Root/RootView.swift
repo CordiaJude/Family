@@ -10,11 +10,14 @@ struct RootView: View {
         @Bindable var session = session
         Group {
             if households.isEmpty {
-                NoHouseholdView()
+                OnboardingView()
+                    .transition(.opacity)
             } else {
                 FamilyTabView()
+                    .transition(.opacity)
             }
         }
+        .animation(.smooth, value: households.isEmpty)
         .sheet(item: $session.presentedSheet) { sheet in
             switch sheet {
             case .settings:
@@ -57,19 +60,10 @@ struct FamilyTabView: View {
     }
 }
 
-/// Shown when there's no household yet. Onboarding replaces this in Phase 7.
-struct NoHouseholdView: View {
-    var body: some View {
-        ContentUnavailableView {
-            Label("Welcome to Family", systemImage: "house.and.flag")
-        } description: {
-            Text("Create a household to share your calendar, rides, lists and chores with the people you live with.")
-        }
-    }
-}
-
+#if DEBUG
 #Preview {
     RootView()
         .environment(HouseholdSession())
         .modelContainer(SampleHousehold.previewContainer())
 }
+#endif

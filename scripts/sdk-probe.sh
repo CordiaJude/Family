@@ -34,4 +34,6 @@ while IFS= read -r line; do
     grep -rhE --include='*arm64-apple-ios-simulator.swiftinterface' -- "$line" "$FW" 2>/dev/null \
       | sed -E 's/^[[:space:]]+//' | sort -u | head -40 || true
   fi
+  # Objective-C frameworks (Core Location, MapKit, EventKit...) declare their API in headers.
+  grep -rhE ${ctx[@]+"${ctx[@]}"} --include='*.h' -- "$line" "$FW" 2>/dev/null | sed -E 's/^[[:space:]]+//' | head -30 || true
 done < "$(dirname "$0")/probe-patterns.txt"
