@@ -1,17 +1,13 @@
 # One extended regex per line. Matching declarations from the iOS Simulator SDK
 # .swiftinterface files are printed by the sdk-probe workflow.
 # Prefix "A<n> " or "B<n> " to print n lines of context after or before each match.
-B3 func tabViewBottomAccessory<Content>\(isEnabled
-A12 public enum TabViewBottomAccessoryPlacement
-A14 public struct TabBarMinimizeBehavior
-A16 public struct ScrollEdgeEffectStyle
-A16 public struct GlassEffectTransition
-A30 public struct Glass : Swift.Equatable
-A12 public struct ToolbarSpacer
-B3 func navigationSubtitle\(
-B2 func sensoryFeedback<T>\(_ feedback
-A40 public struct SensoryFeedback
-B3 class MKReverseGeocodingRequest
-B2 func searchToolbarBehavior
-B2 func tabViewSearchActivation
-B2 static var zoom\(
+A30 class CLServiceSession
+A20 struct Diagnostic
+B2 public static func liveUpdates\(
+var location: CoreLocation.CLLocation
+A30 class MKAddress
+addressRepresentations
+B3 init\(completion: MapKit.MKLocalSearchCompletion
+B2 func requestFullAccessToEvents
+B2 struct ContactAccessButton
+B3 func contactAccessPicker
